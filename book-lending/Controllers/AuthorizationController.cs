@@ -26,9 +26,9 @@ public class AuthorizationController : ControllerBase
     ///     Post /Authorization/Register
     /// </remarks>
     /// <returns>
-    ///     200 OK with the user data.
+    ///     200 OK.
     /// </returns>
-    /// <response code="200">Returns the list of user data.</response>
+    /// <response code="200">Returns success.</response>
     ///  <response code="422">Invalid user data</response>
     ///  <response code="500">Internal server error</response>
     [HttpPost("Register")]
@@ -42,4 +42,27 @@ public class AuthorizationController : ControllerBase
         return Ok("Registration success");
     }
 
+    /// <summary>
+    ///     Login user
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     Post /Authorization/Login
+    /// </remarks>
+    /// <returns>
+    ///     200 OK with the user data.
+    /// </returns>
+    /// <response code="200">Returns the list of user data.</response>
+    ///  <response code="422">Invalid user data</response>
+    ///  <response code="500">Internal server error</response>
+    [HttpGet("Login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Login(string login, string password)
+    {
+        var user = await _authorizationService.LoginUser(login, password);
+        _logger.LogInformation($"User {login} is authorized");
+        return Ok(user);
+    }
 }

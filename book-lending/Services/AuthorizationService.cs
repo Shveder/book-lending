@@ -3,6 +3,7 @@ using System.Text;
 using book_lending.DTO;
 using book_lending.Exceptions;
 using book_lending.Models;
+using book_lending.Models.Interfaces;
 using book_lending.Repository.Interface;
 using book_lending.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -74,5 +75,27 @@ public class AuthorizationService : IAuthorizationService
     {
         var user = await _repository.Get<UserModel>(model => model.Login == login).FirstOrDefaultAsync();
         return user != null;
+    }
+
+    public async Task<IModels> LoginUser(string login, string password)
+    {
+        var user = await _repository
+            .Get<UserModel>(model => model.Login == login)
+            .FirstOrDefaultAsync();
+        
+        if (user == null)
+            throw new IncorrectDataException("Неверный логин или пароль");
+        
+        password = Hash(password);
+        password = Hash(password + user.Salt);
+        
+        var user1 = await _repository
+            .Get<UserModel>(model => model.Login == login && model.Password == password)
+            .FirstOrDefaultAsync();
+        
+        if (user1 == null)
+            throw new IncorrectDataException("Неверный логин или пароль");
+
+        return user1;
     }
 }
