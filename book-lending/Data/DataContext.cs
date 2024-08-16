@@ -7,6 +7,12 @@ namespace book_lending.Data
     {
         
         public DbSet<UserModel> Users { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookOwnership> BookOwnerships { get; set; }
+        public DbSet<Operation> Operations { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleOperation> RoleOperations { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

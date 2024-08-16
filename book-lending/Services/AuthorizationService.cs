@@ -37,7 +37,6 @@ public class AuthorizationService : IAuthorizationService
         
         var user = new UserModel
         {
-            Id = Guid.NewGuid(),
             Login = request.Login,
             Password = request.Password,
             Salt = salt,
