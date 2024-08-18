@@ -11,11 +11,13 @@ public class AdminService : IAdminService
 {
     private readonly ILogger<AuthorizationService> _logger;
     private readonly IDbRepository _repository;
+    private readonly IGetModelService _modelService;
 
-    public AdminService(IDbRepository repository, ILogger<AuthorizationService> logger)
+    public AdminService(IDbRepository repository, ILogger<AuthorizationService> logger, IGetModelService modelService)
     {
         _repository = repository;
         _logger = logger;
+        _modelService = modelService;
     }
 
     public async Task AddNewRole(string roleName)
@@ -64,6 +66,10 @@ public class AdminService : IAdminService
         return await Task.FromResult(_repository.GetAll<Operation>());
     }
 
+    public async Task<IQueryable<UserModel>> GetUsers()
+    {
+        return await Task.FromResult(_repository.GetAll<UserModel>());
+    }
     private async Task<bool> IsOperationUnique(string name)
     {
         var operation = await _repository.Get<Operation>(model => model.OperationName == name).FirstOrDefaultAsync();
@@ -72,8 +78,8 @@ public class AdminService : IAdminService
 
     public async Task AddOperationToRole(AddOperationToRoleRequest request)
     {
-        var operation = GetOperationById(request.OperationId);
-        var role = GetRoleById(request.RoleId);
+        var operation = _modelService.GetOperationById(request.OperationId);
+        var role = _modelService.GetRoleById(request.RoleId);
 
         if (IsRoleOperationExist(role, operation))
             throw new IncorrectDataException("Role already has this operation");
@@ -93,20 +99,28 @@ public class AdminService : IAdminService
             model.Role == role && model.Operation == operation).FirstOrDefault();
         return roleOperation != null;
     }
-    private Operation GetOperationById(Guid id)
+    public async Task AddRoleToUser(AddRoleToUserRequest request)
     {
-        var operation =  _repository.Get<Operation>(model => model.Id == id).FirstOrDefault();
-        if (operation == null)
-            throw new IncorrectDataException("No such operation");
-        return operation;
+       var role = _modelService.GetRoleById(request.RoleId);
+       var user = _modelService.GetUserById(request.UserId);
+
+        if (IsUserRoleExist(role, user))
+            throw new IncorrectDataException("User already has this role");
+        
+        var userRole = new UserRole()
+        {
+            Role = role,
+            User = user
+        };
+
+        await _repository.Add(userRole);
+        await _repository.SaveChangesAsync();
     }
-    
-    private Role GetRoleById(Guid id)
+    private bool IsUserRoleExist(Role role, UserModel user)
     {
-        var role =  _repository.Get<Role>(model => model.Id == id).FirstOrDefault();
-        if (role == null)
-            throw new IncorrectDataException("No such role");
-        return role;
+        var userRole =  _repository.Get<UserRole>(model => 
+            model.Role == role && model.User == user).FirstOrDefault();
+        return userRole != null;
     }
-    
+
 }

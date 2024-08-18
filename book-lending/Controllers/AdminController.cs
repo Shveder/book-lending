@@ -110,6 +110,27 @@ public class AdminController : ControllerBase
     }
     
     /// <summary>
+    ///     Get all users
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     Post /Admin/GetUsers
+    /// </remarks>
+    /// <returns>
+    ///     200 OK 
+    /// </returns>
+    /// <response code="200">Users are got </response>
+    /// <response code="500">Internal server error</response>
+    [HttpGet("GetUsers")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetUsers()
+    {
+        _logger.LogInformation("GetUsers is got");
+        return Ok(await _adminService.GetUsers());
+    }
+    
+    /// <summary>
     ///     Add operation to role
     /// </summary>
     /// <remarks>
@@ -131,5 +152,30 @@ public class AdminController : ControllerBase
         await _adminService.AddOperationToRole(request);
         _logger.LogInformation("Operation to role is added");
         return Ok("Operation to role is added");
+    }
+    
+    /// <summary>
+    ///     Add role to user
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     Post /Admin/AddRoleToUser
+    /// </remarks>
+    /// <returns>
+    ///     200 OK 
+    /// </returns>
+    /// <response code="200">Role is added to user</response>
+    /// <response code="422">Invalid data</response>
+    /// <response code="500">Internal server error</response>
+    [HttpPost("AddRoleToUser")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> AddRoleToUser([FromBody] AddRoleToUserRequest request)
+    {
+        await _adminService.AddRoleToUser(request);
+        const string answer = "Role is added to user";
+        _logger.LogInformation(answer);
+        return Ok(answer);
     }
 }

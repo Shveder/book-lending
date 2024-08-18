@@ -10,4 +10,6 @@ public interface IAdminService
     Task<IQueryable<Role>> GetRoles();
     Task<IQueryable<Operation>> GetOperations();
     Task AddOperationToRole(AddOperationToRoleRequest request);
+    Task AddRoleToUser(AddRoleToUserRequest request);
+    Task<IQueryable<UserModel>> GetUsers();
 }
