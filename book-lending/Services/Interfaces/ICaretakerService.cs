@@ -1,7 +1,4 @@
-﻿using book_lending.DTO;
-using book_lending.Models;
-
-namespace book_lending.Services.Interfaces;
+﻿namespace book_lending.Services.Interfaces;
 
 public interface ICaretakerService
 {

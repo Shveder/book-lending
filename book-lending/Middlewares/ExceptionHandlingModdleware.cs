@@ -1,7 +1,4 @@
 using System.Net;
-using System.Security.Authentication;
-using book_lending.DTO;
-using book_lending.Exceptions;
 
 namespace book_lending.Middlewares;
 

@@ -1,6 +1,3 @@
-using book_lending.Models;
-using Microsoft.EntityFrameworkCore;
-
 namespace book_lending.Data
 {
     public class DataContext : DbContext

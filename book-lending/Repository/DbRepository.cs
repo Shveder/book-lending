@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using book_lending.Data;
 using book_lending.Models.Interfaces;
 using book_lending.Repository.Interface;
-using Microsoft.EntityFrameworkCore;
 
 namespace book_lending.Repository;
 

@@ -1,7 +1,4 @@
-﻿using book_lending.DTO;
-using book_lending.Exceptions;
-using book_lending.Models;
-using book_lending.Repository.Interface;
+﻿using book_lending.Repository.Interface;
 using book_lending.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

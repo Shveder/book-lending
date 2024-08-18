@@ -1,5 +1,4 @@
-﻿using book_lending.DTO;
-using book_lending.Services.Interfaces;
+﻿using book_lending.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace book_lending.Controllers;
