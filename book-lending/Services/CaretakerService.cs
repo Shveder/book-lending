@@ -31,11 +31,6 @@ public class CaretakerService : ICaretakerService
         await _repository.SaveChangesAsync();
     }
 
-    public async Task<IQueryable<Book>> GetAllBooks()
-    {
-        return await Task.FromResult(_repository.GetAll<Book>());
-    }
-
     public async Task DeleteBook(DeleteBookRequest request)
     {
         var book = _modelService.GetBookById(request.BookId);

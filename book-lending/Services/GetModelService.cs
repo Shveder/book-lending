@@ -41,13 +41,30 @@ public class GetModelService : IGetModelService
             throw new IncorrectDataException("No such book");
         return book;
     }
+    public BookOwnership GetBookOwnership(Guid bookOwnId)
+    {
+        var bookOwn =  _repository.Get<BookOwnership>(bookOwn =>
+            bookOwn.Id == bookOwnId).Include(model=>model.Book).FirstOrDefault();
+        if (bookOwn == null)
+            throw new IncorrectDataException("No such book ownership");
+        return bookOwn;
+    }public bool IsBookAvailable(Guid bookId)
+    { 
+        var bookOwn =  _repository.Get<BookOwnership>(bookOwn => bookOwn.Book.Id == bookId).FirstOrDefault();
+        return bookOwn == null;
+    }
     public async Task<List<UserRole>> GetUserRoles(Guid userId)
     {
         var user = GetUserById(userId);
         return await _repository.GetAll<UserRole>().Where(role => role.User == user)
             .Include(model=> model.Role).ToListAsync();
     }
-    
+    public async Task<List<BookOwnership>> GetUserBooks(Guid userId)
+    {
+        var user = GetUserById(userId);
+        return await _repository.GetAll<BookOwnership>().Where(bookOwn => bookOwn.User == user)
+            .Include(bookOwn=> bookOwn.Book).ToListAsync();
+    }
     public async Task<List<RoleOperation>> GetRoleOperations(Guid roleId)
     {
         var role = GetRoleById(roleId);
@@ -68,5 +85,18 @@ public class GetModelService : IGetModelService
             }
         }
         return false;
+    }
+    public async Task<IQueryable<Book>> GetAllBooks()
+    {
+        return await Task.FromResult(_repository.GetAll<Book>());
+    }
+    public async Task<IQueryable<UserModel>> GetAllUsers()
+    {
+        return await Task.FromResult(_repository.GetAll<UserModel>());
+    }
+
+    public async Task<IQueryable<BookOwnership>> GetAllOwnerships()
+    {
+        return await Task.FromResult(_repository.GetAll<BookOwnership>());
     }
 }

@@ -10,11 +10,13 @@ public class CaretakerController : ControllerBase
 {
     private readonly ILogger<CaretakerController> _logger;
     private readonly ICaretakerService _caretakerService;
+    private readonly IGetModelService _modelService;
 
-    public CaretakerController(ILogger<CaretakerController> logger, ICaretakerService caretakerService)
+    public CaretakerController(ILogger<CaretakerController> logger, ICaretakerService caretakerService, IGetModelService modelService)
     {
         _logger = logger;
         _caretakerService = caretakerService;
+        _modelService = modelService;
     }
     
     /// <summary>
@@ -43,7 +45,7 @@ public class CaretakerController : ControllerBase
     }
     
     /// <summary>
-    ///     Add new book
+    ///     Get all books
     /// </summary>
     /// <remarks>
     ///     Sample request:
@@ -59,7 +61,7 @@ public class CaretakerController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllBooks()
     {
-        return Ok(await _caretakerService.GetAllBooks());
+        return Ok(await _modelService.GetAllBooks());
     }
     
     /// <summary>

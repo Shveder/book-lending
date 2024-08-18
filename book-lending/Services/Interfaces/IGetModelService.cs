@@ -9,6 +9,12 @@ public interface IGetModelService
     UserModel GetUserById(Guid id);
     Task<List<UserRole>> GetUserRoles(Guid userId);
     Task<List<RoleOperation>> GetRoleOperations(Guid userId);
+    Task<List<BookOwnership>> GetUserBooks(Guid userId);
     Task<bool> IsUserHasPermission(Guid userId, string requestOperation);
     Book GetBookById(Guid bookId);
+    bool IsBookAvailable(Guid bookId);
+    BookOwnership GetBookOwnership(Guid bookId);
+    Task<IQueryable<Book>> GetAllBooks();
+    Task<IQueryable<UserModel>> GetAllUsers();
+    Task<IQueryable<BookOwnership>> GetAllOwnerships();
 }

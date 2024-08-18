@@ -1,17 +1,22 @@
-using book_lending.Controllers;
+using System.Text.Json.Serialization;
 using book_lending.Data;
 using book_lending.Middlewares;
 using book_lending.Repository;
 using book_lending.Repository.Interface;
 using book_lending.Services;
 using book_lending.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
