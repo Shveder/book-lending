@@ -18,9 +18,18 @@ public class HandymanService : IHandymanService
 
     public async Task<string> TryToRepairBook(TryToRepairRequest request)
     {
-        var chance = Random.Next(0, 100);
-        var book = _modelService.GetBookById(request.BookId);
+        const string requestOperation = "RepairBook";
         
+        if (!(await _modelService.IsUserHasPermission(request.UserId, requestOperation)))
+            throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
+        
+        var book = _modelService.GetBookById(request.BookId);
+        if(book.Status == "Factory new")
+            throw new IncorrectDataException("This book is not damaged");
+        if(book.Status == "Cant be repaired")
+            throw new IncorrectDataException("This book cant be repaired");
+        
+        var chance = Random.Next(0, 100);
         book.Status = chance < 25 ? "Cant be repaired" : "Factory new";
         book.DateUpdated = DateTime.UtcNow;
 
