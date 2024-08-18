@@ -82,7 +82,7 @@ public class CaretakerController : ControllerBase
     public async Task<IActionResult> DeleteBook([FromBody] DeleteBookRequest request)
     {
         await _caretakerService.DeleteBook(request);
-        return Ok();
+        return Ok("Book is deleted");
     }
     
     

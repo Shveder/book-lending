@@ -45,7 +45,7 @@ public class CaretakerService : ICaretakerService
             throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
         
         if (book.Status != "Cant be repaired")
-            throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
+            throw new IncorrectDataException("This book is not critically damaged");
 
         await _repository.Delete<Book>(request.BookId);
         await _repository.SaveChangesAsync();
