@@ -62,4 +62,29 @@ public class CaretakerController : ControllerBase
     {
         return Ok(await _caretakerService.GetAllBooks());
     }
+    
+    /// <summary>
+    ///     Delete damaged books that can't be repaired
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     Delete /Caretaker/DeleteBook
+    /// </remarks>
+    /// <returns>
+    ///     200 OK.
+    /// </returns>
+    /// <response code="200">Deletes damaged book.</response>
+    /// <response code="422">No access or no book.</response>
+    /// <response code="500">Internal server error</response>
+    [HttpDelete("DeleteBook")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteBook([FromBody] DeleteBookRequest request)
+    {
+        await _caretakerService.DeleteBook(request);
+        return Ok();
+    }
+    
+    
 }

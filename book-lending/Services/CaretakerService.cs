@@ -39,4 +39,18 @@ public class CaretakerService : ICaretakerService
         return await Task.FromResult(_repository.GetAll<Book>());
     }
 
-   }
+    public async Task DeleteBook(DeleteBookRequest request)
+    {
+        var book = _modelService.GetBookById(request.BookId);
+        const string requestOperation = "DeleteDamagedBook";
+        
+        if (!(await _modelService.IsUserHasPermission(request.UserId, requestOperation)))
+            throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
+        
+        if (book.Status != "Cant be repaired")
+            throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
+
+        await _repository.Delete<Book>(request.BookId);
+        await _repository.SaveChangesAsync();
+    }
+}

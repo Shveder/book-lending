@@ -10,4 +10,5 @@ public interface IGetModelService
     Task<List<UserRole>> GetUserRoles(Guid userId);
     Task<List<RoleOperation>> GetRoleOperations(Guid userId);
     Task<bool> IsUserHasPermission(Guid userId, string requestOperation);
+    Book GetBookById(Guid bookId);
 }

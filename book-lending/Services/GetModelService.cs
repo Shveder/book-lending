@@ -37,6 +37,13 @@ public class GetModelService : IGetModelService
             throw new IncorrectDataException("No such user");
         return user;
     }
+    public Book GetBookById(Guid bookId)
+    {
+        var book =  _repository.Get<Book>(book => book.Id == bookId).FirstOrDefault();
+        if (book == null)
+            throw new IncorrectDataException("No such book");
+        return book;
+    }
     public async Task<List<UserRole>> GetUserRoles(Guid userId)
     {
         var user = GetUserById(userId);
