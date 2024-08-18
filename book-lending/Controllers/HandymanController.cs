@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace book_lending.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class HandymanController : ControllerBase
 {
     private readonly ILogger<HandymanController> _logger;

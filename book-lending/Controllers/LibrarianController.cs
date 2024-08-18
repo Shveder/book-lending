@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace book_lending.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class LibrarianController : ControllerBase
 {
     private readonly ILogger<LibrarianController> _logger;
