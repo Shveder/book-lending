@@ -43,4 +43,23 @@ public class CaretakerController : ControllerBase
         return Ok(answer);
     }
     
+    /// <summary>
+    ///     Add new book
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///     Get /Caretaker/GetAllBooks
+    /// </remarks>
+    /// <returns>
+    ///     200 OK.
+    /// </returns>
+    /// <response code="200">Returns list of books.</response>
+    /// <response code="500">Internal server error</response>
+    [HttpGet("GetAllBooks")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetAllBooks()
+    {
+        return Ok(await _caretakerService.GetAllBooks());
+    }
 }

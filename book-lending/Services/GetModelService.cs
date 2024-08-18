@@ -50,4 +50,19 @@ public class GetModelService : IGetModelService
         return await _repository.GetAll<RoleOperation>().Where(model => model.Role == role)
             .Include(model=> model.Operation).ToListAsync();
     }
+    public async Task<bool> IsUserHasPermission(Guid userId, string requestOperation)
+    {
+        var userRoles = await GetUserRoles(userId);
+        foreach (var userRole in userRoles)
+        {
+            var operations = await GetRoleOperations(userRole.Role.Id);
+
+            if (operations.Select(operation => GetOperationById(operation.Operation.Id))
+                .Any(accessOperation => accessOperation.OperationName.Contains(requestOperation)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

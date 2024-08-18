@@ -22,7 +22,7 @@ public class CaretakerService : ICaretakerService
         const string requestOperation = "AddBook";
 
 
-        if (!(await IsUserHasPermission(request.UserId, requestOperation)))
+        if (!(await _modelService.IsUserHasPermission(request.UserId, requestOperation)))
             throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
         
         var book = new Book()
@@ -34,19 +34,9 @@ public class CaretakerService : ICaretakerService
         await _repository.SaveChangesAsync();
     }
 
-    private async Task<bool> IsUserHasPermission(Guid userId, string requestOperation)
+    public async Task<IQueryable<Book>> GetAllBooks()
     {
-        var userRoles = await _modelService.GetUserRoles(userId);
-        foreach (var userRole in userRoles)
-        {
-            var operations = await _modelService.GetRoleOperations(userRole.Role.Id);
-
-            if (operations.Select(operation => _modelService.GetOperationById(operation.Operation.Id))
-                .Any(accessOperation => accessOperation.OperationName.Contains(requestOperation)))
-            {
-                return true;
-            }
-        }
-        return false;
+        return await Task.FromResult(_repository.GetAll<Book>());
     }
-}
+
+   }
