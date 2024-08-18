@@ -31,20 +31,6 @@ public class ExceptionHandlingMiddleware
                 HttpStatusCode.UnprocessableEntity,
                 ex.Message);
         }
-        catch (KeyNotFoundException ex)
-        {
-            await HandleExceptionAsync(httpContext,
-                ex.Message,
-                HttpStatusCode.NotFound,
-                ex.Message);
-        }
-        catch (AuthenticationException ex)
-        {
-            await HandleExceptionAsync(httpContext,
-                ex.Message,
-                HttpStatusCode.BadRequest,
-                ex.Message);
-        }
         catch (Exception ex)
         {
             await HandleExceptionAsync(httpContext,
