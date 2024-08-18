@@ -3,5 +3,5 @@
 public interface ILibrarianService
 {
     Task GiveBook(GiveBookRequest request);
-    Task ReturnBook(Guid bookOwnId, string status);
+    Task ReturnBook(Guid userId, Guid bookOwnId, string status);
 }

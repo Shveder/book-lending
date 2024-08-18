@@ -74,9 +74,9 @@ public class LibrarianController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> ReturnBook(Guid bookOwnId, [FromQuery] ItemCondition condition)
+    public async Task<IActionResult> ReturnBook(Guid userId, Guid bookOwnId, [FromQuery] ItemCondition condition)
     {
-        await _librarianService.ReturnBook(bookOwnId, condition.ToString());
+        await _librarianService.ReturnBook(userId, bookOwnId, condition.ToString());
         const string answer = "Book is returned";
         _logger.LogInformation(answer);
         return Ok(answer);

@@ -26,6 +26,7 @@ builder.Services.AddTransient<IAuthorizationService, AuthorizationService>();
 builder.Services.AddTransient<IAdminService, AdminService>();
 builder.Services.AddTransient<ICaretakerService, CaretakerService>();
 builder.Services.AddTransient<IGetModelService, GetModelService>();
+builder.Services.AddTransient<IHandymanService, HandymanService>();
 
 builder.Services.AddDbContext<DataContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

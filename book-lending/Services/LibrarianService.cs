@@ -46,8 +46,14 @@ public class LibrarianService : ILibrarianService
         return userBooks.All(userBook => userBook.ReturnDate >= DateTime.UtcNow);
     }
 
-    public async Task ReturnBook(Guid bookOwnId, string status)
+    public async Task ReturnBook(Guid userId, Guid bookOwnId, string status)
     {
+        const string requestOperation = "ReturnBook";
+
+        if (!(await _modelService.IsUserHasPermission(userId, requestOperation)))
+            throw new IncorrectDataException($"User does not have permission to operation ({requestOperation})");
+        
+        
         var bookOwn = _modelService.GetBookOwnership(bookOwnId);
         var book = _modelService.GetBookById(bookOwn.Book.Id);
 
