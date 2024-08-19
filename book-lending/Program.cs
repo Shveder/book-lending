@@ -8,54 +8,64 @@ using book_lending.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
-
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
-
-builder.Services.AddTransient<IDbRepository, DbRepository>();
-builder.Services.AddTransient<ILibrarianService, LibrarianService>();
-builder.Services.AddTransient<IAuthorizationService, AuthorizationService>();
-builder.Services.AddTransient<IAdminService, AdminService>();
-builder.Services.AddTransient<ICaretakerService, CaretakerService>();
-builder.Services.AddTransient<IGetModelService, GetModelService>();
-builder.Services.AddTransient<IHandymanService, HandymanService>();
-
-builder.Services.AddDbContext<DataContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+ConfigureMiddleware(app);
+
+await InitializeDatabaseAsync(app);
+
+app.Run();
+
+static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+    
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+    
+    services.AddTransient<IDbRepository, DbRepository>();
+    services.AddTransient<ILibrarianService, LibrarianService>();
+    services.AddTransient<IAuthorizationService, AuthorizationService>();
+    services.AddTransient<IAdminService, AdminService>();
+    services.AddTransient<ICaretakerService, CaretakerService>();
+    services.AddTransient<IGetModelService, GetModelService>();
+    services.AddTransient<IHandymanService, HandymanService>();
+    
+    services.AddDbContext<DataContext>(options => 
+        options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 }
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-using (var scope = app.Services.CreateScope())
+static void ConfigureMiddleware(WebApplication app)
 {
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseMiddleware<ExceptionHandlingMiddleware>();
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+}
+
+static async Task InitializeDatabaseAsync(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
+
     try
     {
         var context = services.GetRequiredService<DataContext>();
         
-        context.Database.Migrate();
+        await context.Database.MigrateAsync();
+        await SeedDataAsync(context);
     }
     catch (Exception ex)
     {
@@ -64,4 +74,31 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.Run();
+static async Task SeedDataAsync(DataContext context)
+{
+    if (await context.Roles.AnyAsync()) return;
+
+    var caretakerRole = new Role { RoleName = "Caretaker" };
+    var handymanRole = new Role { RoleName = "Handyman" };
+    var librarianRole = new Role { RoleName = "Librarian" };
+
+    context.Roles.AddRange(caretakerRole, handymanRole, librarianRole);
+
+    var addBookOperation = new Operation { OperationName = "AddBook" };
+    var repairBookOperation = new Operation { OperationName = "RepairBook" };
+    var giveBookOperation = new Operation { OperationName = "GiveBook" };
+    var returnBookOperation = new Operation { OperationName = "ReturnBook" };
+    var deleteBookOperation = new Operation { OperationName = "DeleteDamagedBook" };
+
+    context.Operations.AddRange(addBookOperation, repairBookOperation, giveBookOperation, returnBookOperation, deleteBookOperation);
+
+    context.RoleOperations.AddRange(
+        new RoleOperation { Role = caretakerRole, Operation = addBookOperation },
+        new RoleOperation { Role = caretakerRole, Operation = deleteBookOperation },
+        new RoleOperation { Role = handymanRole, Operation = repairBookOperation },
+        new RoleOperation { Role = librarianRole, Operation = giveBookOperation },
+        new RoleOperation { Role = librarianRole, Operation = returnBookOperation }
+    );
+
+    await context.SaveChangesAsync();
+}
