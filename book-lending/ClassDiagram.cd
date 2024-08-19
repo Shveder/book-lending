@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="book_lending.Services.AdminService" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="9.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IBAIAAQAAABAAIAAABIAgAEAIAAAAACgAAAACAAAAAA=</HashCode>
+      <FileName>Services\AdminService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Services.AuthorizationService" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAJAAAAAAAAAAAAEYAAAABAAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\AuthorizationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Services.CaretakerService" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAABAAAAAACAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CaretakerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Services.GetModelService" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="10.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAAEAIAABAIAACAAAAAAACAAAAlAAACAAAAAEQBAA=</HashCode>
+      <FileName>Services\GetModelService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Services.HandymanService" BaseTypeListCollapsed="true">
+    <Position X="8" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAACAAAAABAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Services\HandymanService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Services.LibrarianService" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABQAAAAAAEAAAAAAIAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Services\LibrarianService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="book_lending.Models.BaseEntity" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="book_lending.Models.Book">
+    <Position X="1.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.BookOwnership">
+    <Position X="5.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAADAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BookOwnership.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.Operation">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Operation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.Role">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.RoleOperation">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\RoleOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.UserModel">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Models.UserRole">
+    <Position X="3.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Controllers.AdminController">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAABAAAAAAAIAAABAAgAEAIAAAAACAAAAACAAAAAA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Controllers.AuthorizationController">
+    <Position X="19.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAABAAAAEAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AuthorizationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Controllers.CaretakerController">
+    <Position X="21.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAABAAAAAAAACAAAAAAIAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CaretakerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Controllers.HandymanController">
+    <Position X="17.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAEAAAAAAAAAAAAAAAACAIAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\HandymanController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="book_lending.Controllers.LibrarianController">
+    <Position X="19.5" Y="3.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="book_lending.Controllers.LibrarianController.ItemCondition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\LibrarianController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AEAAAEAAAAAQAAIAAAAAAAAAIIAAAAAgAAAAAAEAAAA=</HashCode>
+      <FileName>Controllers\LibrarianController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="book_lending.Services.Interfaces.IAdminService">
+    <Position X="15.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAIAAABAAgAEAAAAAAACAAAAACAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IAdminService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Services.Interfaces.IAuthorizationService">
+    <Position X="13.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\Interfaces\IAuthorizationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Services.Interfaces.ICaretakerService">
+    <Position X="11.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\ICaretakerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Services.Interfaces.IGetModelService">
+    <Position X="6.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAEAIAAAAIAACAAAAAAACAAAAlAAACAAAAAEQBAA=</HashCode>
+      <FileName>Services\Interfaces\IGetModelService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Services.Interfaces.IHandymanService">
+    <Position X="8" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\IHandymanService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Services.Interfaces.ILibrarianService">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\Interfaces\ILibrarianService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="book_lending.Models.Interfaces.IModels">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Interfaces\IModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
