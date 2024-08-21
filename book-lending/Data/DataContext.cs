@@ -18,7 +18,7 @@ namespace book_lending.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(
-                @"Host=localhost;Port=5432;Database=BookLending;Username=postgres;Password=postgres"); 
+                @"Host=postgres;Port=5432;Database=BookLending;Username=postgres;Password=postgres");
         }
     }
 }
