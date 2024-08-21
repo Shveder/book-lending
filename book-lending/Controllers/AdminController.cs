@@ -9,10 +9,10 @@ namespace book_lending.Controllers;
 
 public class AdminController : ControllerBase
 {
-    private readonly ILogger<AuthorizationController> _logger;
+    private readonly ILogger<AdminController> _logger;
     private readonly IAdminService _adminService;
 
-    public AdminController(ILogger<AuthorizationController> logger, IAdminService adminService)
+    public AdminController(ILogger<AdminController> logger, IAdminService adminService)
     {
         _logger = logger;
         _adminService = adminService;
